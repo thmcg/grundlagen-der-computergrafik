@@ -30,6 +30,10 @@ $(foreach dir,$(SRC_DIRS),$(eval SRC_$(dir) := $(wildcard $(dir)/*.cpp)))
 #Define list of object files per chapter
 $(foreach dir,$(SRC_DIRS),$(eval OBJ_$(dir) := $(patsubst %.cpp,obj/%.o,$(SRC_$(dir)))))
 
+# Define dependency files per chapter
+$(foreach dir,$(SRC_DIRS),$(eval DEP_$(dir) := $$(OBJ_$(dir):.o=.d)))
+DEP_ALL := $(foreach dir,$(SRC_DIRS),$(DEP_$(dir)))
+
 # Define dependencies for each build target
 $(foreach dir,$(SRC_DIRS), $(eval bin/$(dir): $$(OBJ_$(dir))))
 
@@ -47,11 +51,11 @@ bin/%:
 	@mkdir -p $(dir $@)
 	@$(CXX) $^ -g -o $@ $(LIB) $(LNK) $(OPT)
 
-# Rule to compile each object file
+# Rule to compile each object (.o) and dependency (.d) file
 obj/%.o: %.cpp
 	@echo Compiling $< ➔ $@ ...
 	@mkdir -p $(dir $@)
-	@$(CXX) -c $< -g -o $@ $(INC) $(OPT)
+	@$(CXX) -MMD -MP -MF $(patsubst %.o,%.d,$@) -c $< -g -o $@ $(INC) $(OPT)
 
 # Rule to build all chapters
 all: $(SRC_DIRS)
@@ -65,5 +69,6 @@ starter-set:
 	zip grundlagen-der-computergrafik.zip README.md Makefile LICENSE .gitignore .clang-format .clangd compile_flags.txt cgb_01 cgb_02 cgb_03 .vscode/launch.json .vscode/tasks.json .vscode/extensions.json
 	zip -r grundlagen-der-computergrafik.zip libraries
 
-# Automatically generate rules for each subfolder
 .PHONY: all clean $(SRC_DIRS)
+
+-include $(DEP_ALL)
