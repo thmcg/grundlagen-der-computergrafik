@@ -25,7 +25,7 @@ Planet::Planet(std::shared_ptr<Texture> &texture, std::shared_ptr<Texture> &spec
     // Custom lights
     float black[3] = {0.0f, 0.0f, 0.0f};
     float white[3] = {1.0f, 1.0f, 1.0f};
-    float white2[3] = {1.05f, 1.05f, 1.05f};
+    float white2[3] = {0.95f, 0.95f, 0.95f};
     float nightLightBright[3] = {0.3f, 0.3f, 0.3f};
     float nightLightDark[3] = {0.1f, 0.1f, 0.1f};
     float blue[3] = {0.397f, 0.587f, 1.0f};
