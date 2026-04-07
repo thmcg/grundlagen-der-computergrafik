@@ -65,9 +65,9 @@ clean:
 	@echo Cleaning ...
 	@rm -rf obj bin
 
-starter-set:
-	zip grundlagen-der-computergrafik.zip README.md Makefile LICENSE .gitignore .clang-format .clangd compile_flags.txt cgb_01 cgb_02 cgb_03 .vscode/launch.json .vscode/tasks.json .vscode/extensions.json
-	zip -r grundlagen-der-computergrafik.zip libraries
+starterset:
+	zip grundlagen-der-computergrafik.zip README.md Makefile LICENSE compile_flags.txt .gitignore .clangd .clang-format cgb_01 cgb_02 cgb_03 .vscode/launch.json .vscode/tasks.json .vscode/extensions.json
+	zip -r grundlagen-der-computergrafik.zip libraries textures
 
 .PHONY: all clean $(SRC_DIRS)
 
