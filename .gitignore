@@ -6,5 +6,6 @@ Thumbs.db
 /cgb_*/bin
 /cgb_*/obj
 /cgb_*a/
+/cgb_*a
 *.zip
 final/
