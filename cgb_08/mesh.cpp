@@ -21,7 +21,7 @@
 
 #include "texture.h"
 
-Mesh::Mesh(std::shared_ptr<Texture> &texture)
+Mesh::Mesh(const std::shared_ptr<Texture> &texture)
     : texture(texture)
 {
 }
@@ -32,7 +32,7 @@ void Mesh::render() const
 
     if (texture)
     {
-        glBindTexture(GL_TEXTURE_2D, texture->id);
+        texture->bind();
     }
 
     glPushMatrix();
@@ -40,18 +40,18 @@ void Mesh::render() const
     worldMatrix.toColumnMajor(worldMatrixF);
     glMultMatrixf(worldMatrixF);
 
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, (float *)&ambient);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, (float *)&diffuse);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, (float *)&specular);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, (float *)&emission);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
 
     glBegin(GL_QUADS);
-    for (auto vertex : vertices)
+    for (const auto &vertex : vertices)
     {
-        glNormal3fv((float *)&vertex.normal);
-        glTexCoord2fv((float *)&vertex.texcoord);
-        glVertex3fv((float *)&vertex.position);
+        glNormal3fv(vertex.normal);
+        glTexCoord2fv(vertex.texcoord);
+        glVertex3fv(vertex.position);
     }
     glEnd();
     glPopMatrix();

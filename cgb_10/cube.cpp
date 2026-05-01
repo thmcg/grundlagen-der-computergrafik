@@ -19,7 +19,7 @@
 
 #include "cube.h"
 
-Cube::Cube(std::shared_ptr<Texture> &texture)
+Cube::Cube(const std::shared_ptr<Texture> &texture)
     : Mesh(texture)
 {
     Vector3 p1(-1, -1, 1);

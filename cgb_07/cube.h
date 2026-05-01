@@ -24,5 +24,5 @@
 class Cube : public Mesh
 {
   public:
-    Cube(std::shared_ptr<Texture> &texture);
+    Cube(const std::shared_ptr<Texture> &texture);
 };

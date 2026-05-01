@@ -28,7 +28,7 @@
 class Mesh
 {
   public:
-    Mesh(std::shared_ptr<Texture> &texture);
+    Mesh(const std::shared_ptr<Texture> &texture);
     virtual ~Mesh() = default;
     virtual void render() const;
     void setPosition(const Vector3 &position);

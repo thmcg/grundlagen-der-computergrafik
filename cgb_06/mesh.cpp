@@ -32,13 +32,13 @@ void Mesh::render() const
     worldMatrix.toColumnMajor(worldMatrixF);
     glMultMatrixf(worldMatrixF);
     glBegin(GL_QUADS);
-    for (auto vertex : vertices)
+    for (const auto &vertex : vertices)
     {
-        glNormal3fv((float *)&vertex.normal);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, (float *)&vertex.color);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, (float *)&vertex.color);
+        glNormal3fv(vertex.normal);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, vertex.color);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, vertex.color);
         glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 30.0f);
-        glVertex3fv((float *)&vertex.position);
+        glVertex3fv(vertex.position);
     }
     glEnd();
     glPopMatrix();

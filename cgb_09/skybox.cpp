@@ -19,7 +19,7 @@
 
 #include "skybox.h"
 
-Skybox::Skybox(std::shared_ptr<Texture> &texture)
+Skybox::Skybox(const std::shared_ptr<Texture> &texture)
     : Mesh(texture)
 {
     vertices.reserve(24);

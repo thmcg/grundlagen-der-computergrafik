@@ -19,7 +19,7 @@
 
 #include "planet.h"
 
-Planet::Planet(std::shared_ptr<Texture> &texture, std::shared_ptr<Texture> &specularTexture, std::shared_ptr<Texture> &nightTexture)
+Planet::Planet(const std::shared_ptr<Texture> &texture, const std::shared_ptr<Texture> &specularTexture, const std::shared_ptr<Texture> &nightTexture)
     : Sphere(texture), specularTexture(specularTexture), nightTexture(nightTexture)
 {
     // Custom lights
@@ -95,7 +95,7 @@ void Planet::render() const
     glBlendFunc(GL_ONE, GL_ONE);
     glClear(GL_DEPTH_BUFFER_BIT);
     glEnable(GL_LIGHT4);
-    glBindTexture(GL_TEXTURE_2D, nightTexture->id);
+    nightTexture->bind();
     renderQuads(worldMatrixF);
     glDisable(GL_LIGHT4);
 
@@ -103,7 +103,7 @@ void Planet::render() const
     glBlendFunc(GL_ONE, GL_ONE);
     glClear(GL_DEPTH_BUFFER_BIT);
     glEnable(GL_LIGHT5);
-    glBindTexture(GL_TEXTURE_2D, texture->id);
+    texture->bind();
     renderQuads(worldMatrixF);
     glDisable(GL_LIGHT5);
 
@@ -111,7 +111,7 @@ void Planet::render() const
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
     glClear(GL_DEPTH_BUFFER_BIT);
     glEnable(GL_LIGHT6);
-    glBindTexture(GL_TEXTURE_2D, specularTexture->id);
+    specularTexture->bind();
     renderQuads(worldMatrixF);
     glDisable(GL_LIGHT6);
 
@@ -126,18 +126,18 @@ void Planet::renderQuads(const float *worldMatrix) const
     glPushMatrix();
     glMultMatrixf(worldMatrix);
 
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, (float *)&ambient);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, (float *)&diffuse);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, (float *)&specular);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, (float *)&emission);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
 
     glBegin(GL_QUADS);
-    for (auto vertex : vertices)
+    for (const auto &vertex : vertices)
     {
-        glNormal3fv((float *)&vertex.normal);
-        glTexCoord2fv((float *)&vertex.texcoord);
-        glVertex3fv((float *)&vertex.position);
+        glNormal3fv(vertex.normal);
+        glTexCoord2fv(vertex.texcoord);
+        glVertex3fv(vertex.position);
     }
     glEnd();
 

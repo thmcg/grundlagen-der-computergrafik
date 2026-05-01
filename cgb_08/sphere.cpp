@@ -19,7 +19,7 @@
 
 #include "sphere.h"
 
-Sphere::Sphere(std::shared_ptr<Texture> &texture)
+Sphere::Sphere(const std::shared_ptr<Texture> &texture)
     : Mesh(texture)
 {
     const int segments = 64;

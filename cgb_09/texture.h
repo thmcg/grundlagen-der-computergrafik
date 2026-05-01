@@ -35,8 +35,9 @@ class Texture
     Texture(Texture &&) = delete;
     Texture &operator=(Texture &&) = delete;
 
-    GLuint id;
+    void bind() const;
 
   private:
+    GLuint id;
     std::string filename;
 };
