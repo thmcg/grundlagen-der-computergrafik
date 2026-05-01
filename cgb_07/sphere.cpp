@@ -24,8 +24,6 @@ Sphere::Sphere(const std::shared_ptr<Texture> &texture)
 {
     const int segments = 64;
     const int rings = segments / 2;
-    const int vcount = segments * rings * 4;
-
     std::vector<std::vector<Vector3>> vectors(segments + 1, std::vector<Vector3>(rings + 1, Vector3(0.0, 0.0, 0.0)));
 
     for (int y = 0; y <= rings; y++)
@@ -51,10 +49,10 @@ Sphere::Sphere(const std::shared_ptr<Texture> &texture)
             double tw = 1.0 / segments;
             double th = 1.0 / rings;
             double ty = rings - y;
-            vertices.emplace_back(vectors[x][y + 1], vectors[x][y + 1], Vector2(x * tw, (ty - 1) * th));
-            vertices.emplace_back(vectors[x + 1][y + 1], vectors[x + 1][y + 1], Vector2((x + 1) * tw, (ty - 1) * th));
-            vertices.emplace_back(vectors[x + 1][y], vectors[x + 1][y], Vector2((x + 1) * tw, (ty)*th));
-            vertices.emplace_back(vectors[x][y], vectors[x][y], Vector2(x * tw, (ty)*th));
+            vertices.emplace_back(vectors[x][y + 1], vectors[x][y + 1].normalize(), Vector2(x * tw, (ty - 1) * th));
+            vertices.emplace_back(vectors[x + 1][y + 1], vectors[x + 1][y + 1].normalize(), Vector2((x + 1) * tw, (ty - 1) * th));
+            vertices.emplace_back(vectors[x + 1][y], vectors[x + 1][y].normalize(), Vector2((x + 1) * tw, (ty)*th));
+            vertices.emplace_back(vectors[x][y], vectors[x][y].normalize(), Vector2(x * tw, (ty)*th));
         }
     }
 }

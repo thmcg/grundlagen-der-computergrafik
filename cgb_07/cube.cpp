@@ -32,29 +32,20 @@ Cube::Cube(const std::shared_ptr<Texture> &texture)
     Vector2 t3(1, 1);
     Vector2 t4(0, 1);
 
-    vertices.emplace_back(p1, normal, t1);
-    vertices.emplace_back(p2, normal, t2);
-    vertices.emplace_back(p3, normal, t3);
-    vertices.emplace_back(p4, normal, t4);
-    for (int i = 1; i < 6; i++)
+    Matrix4 rotations[6] = {
+        Matrix4::identity(),
+        Matrix4::rotateY(deg2rad( 90.0)),
+        Matrix4::rotateY(deg2rad(180.0)),
+        Matrix4::rotateY(deg2rad(270.0)),
+        Matrix4::rotateX(deg2rad( 90.0)),
+        Matrix4::rotateX(deg2rad(-90.0)),
+    };
+    for (const auto &r : rotations)
     {
-        Matrix4 rotationMatrix;
-        if (i <= 3) rotationMatrix = Matrix4::rotateY(deg2rad(90.0 * i));
-        if (i == 4) rotationMatrix = Matrix4::rotateX(deg2rad(90.0));
-        if (i == 5) rotationMatrix = Matrix4::rotateX(deg2rad(-90.0));
-
-        Vector3 normalRotated = (rotationMatrix * Vector4(normal, 1)).xyz();
-
-        Vector4 result = rotationMatrix * Vector4(p1, 1.0);
-        vertices.emplace_back(result.xyz(), normalRotated, t1);
-
-        result = rotationMatrix * Vector4(p2, 1.0);
-        vertices.emplace_back(result.xyz(), normalRotated, t2);
-
-        result = rotationMatrix * Vector4(p3, 1.0);
-        vertices.emplace_back(result.xyz(), normalRotated, t3);
-
-        result = rotationMatrix * Vector4(p4, 1.0);
-        vertices.emplace_back(result.xyz(), normalRotated, t4);
+        Vector3 n = (r * Vector4(normal, 0)).xyz();
+        vertices.emplace_back((r * Vector4(p1, 1)).xyz(), n, t1);
+        vertices.emplace_back((r * Vector4(p2, 1)).xyz(), n, t2);
+        vertices.emplace_back((r * Vector4(p3, 1)).xyz(), n, t3);
+        vertices.emplace_back((r * Vector4(p4, 1)).xyz(), n, t4);
     }
 }

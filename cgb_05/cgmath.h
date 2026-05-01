@@ -32,6 +32,12 @@ struct Vector3
     double x;
     double y;
     double z;
+
+    Vector3 normalize() const
+    {
+        double len = sqrt(x * x + y * y + z * z);
+        return {x / len, y / len, z / len};
+    }
 };
 
 struct Vector4
@@ -83,6 +89,17 @@ struct Matrix4
     double m12;  double m22;  double m32;  double m42;
     double m13;  double m23;  double m33;  double m43;
     double m14;  double m24;  double m34;  double m44;
+
+    static Matrix4 identity()
+    {
+        Matrix4 m = {
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        };
+        return m;
+    }
 
     /**
      * Creates a translation matrix that translates points

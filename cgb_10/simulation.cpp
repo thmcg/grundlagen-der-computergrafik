@@ -22,9 +22,8 @@
 #include <chrono>
 
 Simulation::Simulation(const std::shared_ptr<Mesh> &earth, const std::shared_ptr<Mesh> &satellite)
+    : earth(earth), satellite(satellite)
 {
-    this->earth = earth;
-    this->satellite = satellite;
 }
 
 void Simulation::update()
@@ -42,7 +41,7 @@ void Simulation::updateEarthRotation(double time)
     double timeOfDay = std::fmod(time, 86400);
     double earthRotation = timeOfDay / 86400.0 * deg2rad(360);
 
-    int timeOfYear = std::fmod(time + 864000.0, 31557600);
+    double timeOfYear = std::fmod(time + 864000.0, 31557600);
 
     double earthEcliptic = cos(timeOfYear / 31557600.0 * deg2rad(360)) * deg2rad(-23.4);
 

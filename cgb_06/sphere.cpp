@@ -23,8 +23,6 @@ Sphere::Sphere(const Color &color)
 {
     const int segments = 64;
     const int rings = segments / 2;
-    const int vcount = segments * rings * 4;
-
     std::vector<std::vector<Vector3>> vectors(segments + 1, std::vector<Vector3>(rings + 1, Vector3(0.0, 0.0, 0.0)));
 
     for (int y = 0; y <= rings; y++)
@@ -47,10 +45,10 @@ Sphere::Sphere(const Color &color)
     {
         for (int x = 0; x < segments; x++)
         {
-            vertices.emplace_back(vectors[x][y + 1], vectors[x][y + 1], color);
-            vertices.emplace_back(vectors[x + 1][y + 1], vectors[x + 1][y + 1], color);
-            vertices.emplace_back(vectors[x + 1][y], vectors[x + 1][y], color);
-            vertices.emplace_back(vectors[x][y], vectors[x][y], color);
+            vertices.emplace_back(vectors[x][y + 1], vectors[x][y + 1].normalize(), color);
+            vertices.emplace_back(vectors[x + 1][y + 1], vectors[x + 1][y + 1].normalize(), color);
+            vertices.emplace_back(vectors[x + 1][y], vectors[x + 1][y].normalize(), color);
+            vertices.emplace_back(vectors[x][y], vectors[x][y].normalize(), color);
         }
     }
 }

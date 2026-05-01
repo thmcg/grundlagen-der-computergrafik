@@ -26,27 +26,19 @@ Cube::Cube(const Color &color)
     Vector3 p3( 1,  1, 1);
     Vector3 p4(-1,  1, 1);
 
-    vertices.emplace_back(p1, color);
-    vertices.emplace_back(p2, color);
-    vertices.emplace_back(p3, color);
-    vertices.emplace_back(p4, color);
-    for (int i = 1; i < 6; i++)
+    Matrix4 rotations[6] = {
+        Matrix4::identity(),
+        Matrix4::rotateY(deg2rad( 90.0)),
+        Matrix4::rotateY(deg2rad(180.0)),
+        Matrix4::rotateY(deg2rad(270.0)),
+        Matrix4::rotateX(deg2rad( 90.0)),
+        Matrix4::rotateX(deg2rad(-90.0)),
+    };
+    for (const auto &r : rotations)
     {
-        Matrix4 rotationMatrix;
-        if (i <= 3) rotationMatrix = Matrix4::rotateY(deg2rad(90.0 * i));
-        if (i == 4) rotationMatrix = Matrix4::rotateX(deg2rad(90.0));
-        if (i == 5) rotationMatrix = Matrix4::rotateX(deg2rad(-90.0));
-
-        Vector4 result = rotationMatrix * Vector4(p1, 1.0);
-        vertices.emplace_back(result.xyz(), color);
-
-        result = rotationMatrix * Vector4(p2, 1.0);
-        vertices.emplace_back(result.xyz(), color);
-
-        result = rotationMatrix * Vector4(p3, 1.0);
-        vertices.emplace_back(result.xyz(), color);
-
-        result = rotationMatrix * Vector4(p4, 1.0);
-        vertices.emplace_back(result.xyz(), color);
+        vertices.emplace_back((r * Vector4(p1, 1)).xyz(), color);
+        vertices.emplace_back((r * Vector4(p2, 1)).xyz(), color);
+        vertices.emplace_back((r * Vector4(p3, 1)).xyz(), color);
+        vertices.emplace_back((r * Vector4(p4, 1)).xyz(), color);
     }
 }
