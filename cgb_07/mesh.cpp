@@ -68,8 +68,13 @@ void Mesh::setRotation(const Vector3 &rotation)
     this->rotation = Matrix4::rotateX(rotation.x) * Matrix4::rotateY(rotation.y) * Matrix4::rotateZ(rotation.z);
 }
 
-void Mesh::setMaterial(const Color &diffuse, const Color &specular, const Color &emission, const Color &ambient, const float shininess)
+void Mesh::setMaterial(const Color &ambient, const Color &diffuse, const Color &specular, const Color &emission, const float shininess)
 {
+    this->ambient[0] = static_cast<float>(ambient.r);
+    this->ambient[1] = static_cast<float>(ambient.g);
+    this->ambient[2] = static_cast<float>(ambient.b);
+    this->ambient[3] = static_cast<float>(ambient.a);
+
     this->diffuse[0] = static_cast<float>(diffuse.r);
     this->diffuse[1] = static_cast<float>(diffuse.g);
     this->diffuse[2] = static_cast<float>(diffuse.b);
@@ -84,11 +89,6 @@ void Mesh::setMaterial(const Color &diffuse, const Color &specular, const Color 
     this->emission[1] = static_cast<float>(emission.g);
     this->emission[2] = static_cast<float>(emission.b);
     this->emission[3] = static_cast<float>(emission.a);
-
-    this->ambient[0] = static_cast<float>(ambient.r);
-    this->ambient[1] = static_cast<float>(ambient.g);
-    this->ambient[2] = static_cast<float>(ambient.b);
-    this->ambient[3] = static_cast<float>(ambient.a);
 
     this->shininess = shininess;
 }

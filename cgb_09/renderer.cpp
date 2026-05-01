@@ -122,12 +122,12 @@ void Renderer::start()
     auto satellite = std::make_shared<Cube>(satelliteTexture);
 
     satellite->setScale(0.01);
-    satellite->setMaterial(Colors::black, Colors::black, Colors::white, Colors::black, 0.0f);
+    satellite->setMaterial(Colors::black, Colors::black, Colors::black, Colors::white, 0.0f);
 
     stars->setScale(5);
     sun->setScale(0.03);
     sun->setPosition(Vector3(0, 0, 3));
-    sun->setMaterial(Colors::black, Colors::black, Colors::white, Colors::black, 0.0f);
+    sun->setMaterial(Colors::black, Colors::black, Colors::black, Colors::white, 0.0f);
 
     Scene background;
     background.addMesh(stars);
@@ -145,8 +145,8 @@ void Renderer::start()
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     Vector4 lightPosition(0, 0, 50000, 0);
-    foreground.setLight(lightPosition, Colors::sunLight, Colors::ambientLight, Colors::white);
-    background.setLight(lightPosition, Colors::black, Colors::sky, Colors::black);
+    foreground.setLight(lightPosition, Colors::ambientLight, Colors::sunLight, Colors::white);
+    background.setLight(lightPosition, Colors::sky, Colors::black, Colors::black);
 
     while (!glfwWindowShouldClose(window))
     {

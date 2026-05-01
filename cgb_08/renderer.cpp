@@ -116,7 +116,7 @@ void Renderer::start()
     auto satellite = std::make_shared<Cube>(satelliteTexture);
 
     satellite->setScale(0.01);
-    satellite->setMaterial(Colors::black, Colors::black, Colors::white, Colors::black, 0.0f);
+    satellite->setMaterial(Colors::black, Colors::black, Colors::black, Colors::white, 0.0f);
 
     Scene foreground;
     foreground.addMesh(earth);
@@ -128,7 +128,7 @@ void Renderer::start()
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     Vector4 lightPosition(0, 0, 50000, 0);
-    foreground.setLight(lightPosition, Colors::sunLight, Colors::ambientLight, Colors::white);
+    foreground.setLight(lightPosition, Colors::ambientLight, Colors::sunLight, Colors::white);
 
     while (!glfwWindowShouldClose(window))
     {

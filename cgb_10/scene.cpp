@@ -66,7 +66,7 @@ void Scene::render(const Camera &camera) const
     }
 }
 
-void Scene::setLight(const Vector4 &position, const Color &diffuse, const Color &ambient, const Color &specular)
+void Scene::setLight(const Vector4 &position, const Color &ambient, const Color &diffuse, const Color &specular)
 {
     lightPosition[0] = static_cast<float>(position.x);
     lightPosition[1] = static_cast<float>(position.y);
