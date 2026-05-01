@@ -34,7 +34,7 @@ void Mesh::render() const
     glBegin(GL_QUADS);
     for (auto vertex : vertices)
     {
-        glColor3fv((float *)&vertex.color);
+        glColor4fv((float *)&vertex.color);
         glVertex3fv((float *)&vertex.position);
     }
     glEnd();

@@ -64,12 +64,15 @@ void Scene::setLight(const Vector4 &position, const Color &diffuse, const Color 
     lightAmbient[0] = static_cast<float>(ambient.r);
     lightAmbient[1] = static_cast<float>(ambient.g);
     lightAmbient[2] = static_cast<float>(ambient.b);
+    lightAmbient[3] = static_cast<float>(ambient.a);
 
     lightDiffuse[0] = static_cast<float>(diffuse.r);
     lightDiffuse[1] = static_cast<float>(diffuse.g);
     lightDiffuse[2] = static_cast<float>(diffuse.b);
+    lightDiffuse[3] = static_cast<float>(diffuse.a);
 
     lightSpecular[0] = static_cast<float>(specular.r);
     lightSpecular[1] = static_cast<float>(specular.g);
     lightSpecular[2] = static_cast<float>(specular.b);
+    lightSpecular[3] = static_cast<float>(specular.a);
 }

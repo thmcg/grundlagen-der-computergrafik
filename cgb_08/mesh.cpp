@@ -75,9 +75,25 @@ void Mesh::setScale(const double scale)
 
 void Mesh::setMaterial(const Color &diffuse, const Color &specular, const Color &emission, const Color &ambient, const float shininess)
 {
-    std::copy(&diffuse.r, &diffuse.r + 3, this->diffuse);
-    std::copy(&specular.r, &specular.r + 3, this->specular);
-    std::copy(&emission.r, &emission.r + 3, this->emission);
-    std::copy(&ambient.r, &ambient.r + 3, this->ambient);
+    this->diffuse[0] = static_cast<float>(diffuse.r);
+    this->diffuse[1] = static_cast<float>(diffuse.g);
+    this->diffuse[2] = static_cast<float>(diffuse.b);
+    this->diffuse[3] = static_cast<float>(diffuse.a);
+
+    this->specular[0] = static_cast<float>(specular.r);
+    this->specular[1] = static_cast<float>(specular.g);
+    this->specular[2] = static_cast<float>(specular.b);
+    this->specular[3] = static_cast<float>(specular.a);
+
+    this->emission[0] = static_cast<float>(emission.r);
+    this->emission[1] = static_cast<float>(emission.g);
+    this->emission[2] = static_cast<float>(emission.b);
+    this->emission[3] = static_cast<float>(emission.a);
+
+    this->ambient[0] = static_cast<float>(ambient.r);
+    this->ambient[1] = static_cast<float>(ambient.g);
+    this->ambient[2] = static_cast<float>(ambient.b);
+    this->ambient[3] = static_cast<float>(ambient.a);
+
     this->shininess = shininess;
 }

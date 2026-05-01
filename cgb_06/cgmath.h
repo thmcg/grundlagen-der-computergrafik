@@ -70,13 +70,13 @@ struct Vertex
     Vertex(const Vector3 &position, const Vector3 &norm, const Color &color)
         : position(static_cast<float>(position.x), static_cast<float>(position.y), static_cast<float>(position.z)),
           normal(static_cast<float>(norm.x), static_cast<float>(norm.y), static_cast<float>(norm.z)),
-          color(static_cast<float>(color.r), static_cast<float>(color.g), static_cast<float>(color.b))
+          color(static_cast<float>(color.r), static_cast<float>(color.g), static_cast<float>(color.b), static_cast<float>(color.a))
     {
     }
 
     float position[3];
     float normal[3];
-    float color[3];
+    float color[4];
 };
 
 struct Matrix4

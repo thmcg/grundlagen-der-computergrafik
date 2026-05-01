@@ -37,7 +37,7 @@ class Scene
   private:
     std::vector<std::shared_ptr<Mesh>> meshes;
     float lightPosition[4] = {0.0f, 0.0f, 0.0f, 0.0f};
-    float lightAmbient[3] = {0.0f, 0.0f, 0.0f};
-    float lightDiffuse[3] = {0.0f, 0.0f, 0.0f};
-    float lightSpecular[3] = {0.0f, 0.0f, 0.0f};
+    float lightAmbient[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+    float lightDiffuse[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+    float lightSpecular[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 };

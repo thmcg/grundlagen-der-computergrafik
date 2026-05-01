@@ -42,9 +42,9 @@ class Mesh
     Matrix4 scale = Matrix4::scale(1.0);
     std::vector<Vertex> vertices = {};
     std::shared_ptr<Texture> texture = nullptr;
-    float diffuse[3] = {1.0f, 1.0f, 1.0f};
-    float specular[3] = {1.0f, 1.0f, 1.0f};
-    float emission[3] = {0.0f, 0.0f, 0.0f};
-    float ambient[3] = {1.0f, 1.0f, 1.0f};
+    float diffuse[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+    float specular[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+    float emission[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+    float ambient[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     float shininess = 30.0f;
 };
