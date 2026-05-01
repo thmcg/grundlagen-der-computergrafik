@@ -119,8 +119,7 @@ void Renderer::printFps()
     double currentTime = glfwGetTime();
     if (currentTime - previousTime >= 1.0)
     {
-        uint32_t fps = frameCount;
-        std::cout << "FPS: " << fps << std::endl;
+        std::cout << "FPS: " << frameCount << std::endl;
 
         frameCount = 0;
         previousTime = currentTime;

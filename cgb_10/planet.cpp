@@ -74,6 +74,8 @@ void Planet::render() const
     // Disable default light
     glDisable(GL_LIGHT1);
 
+    glEnable(GL_BLEND);
+
     // render athmosphere
     glBlendFunc(GL_ONE, GL_ZERO);
     glEnable(GL_LIGHT2);
@@ -115,7 +117,7 @@ void Planet::render() const
 
     // Restore all settings to default
     glBindTexture(GL_TEXTURE_2D, 0);
-    glBlendFunc(GL_ONE, GL_ZERO);
+    glDisable(GL_BLEND);
     glEnable(GL_LIGHT1);
 }
 

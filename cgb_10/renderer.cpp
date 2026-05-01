@@ -82,9 +82,6 @@ Renderer::Renderer(const std::string &title, uint32_t width, uint32_t height)
     float noLight[4] = {0.0, 0.0, 0.0, 1.0};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, noLight);
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_ZERO);
-
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     if (glfwRawMouseMotionSupported())
     {
@@ -195,8 +192,7 @@ void Renderer::printFps()
     double currentTime = glfwGetTime();
     if (currentTime - previousTime >= 1.0)
     {
-        uint32_t fps = frameCount;
-        std::cout << "FPS: " << fps << std::endl;
+        std::cout << "FPS: " << frameCount << std::endl;
 
         frameCount = 0;
         previousTime = currentTime;

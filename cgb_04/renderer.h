@@ -31,6 +31,10 @@ class Renderer
   public:
     Renderer(const std::string &title, uint32_t width, uint32_t height);
     ~Renderer();
+    Renderer(const Renderer &) = delete;
+    Renderer &operator=(const Renderer &) = delete;
+    Renderer(Renderer &&) = delete;
+    Renderer &operator=(Renderer &&) = delete;
     void start();
     void printFps();
     void onKeyboardInput(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -40,5 +44,4 @@ class Renderer
     Camera activeCamera = Camera(0.0, 0.0, 3.0);
     double previousTime = 0.0;
     uint32_t frameCount = 0;
-    uint32_t fps = 0;
 };
