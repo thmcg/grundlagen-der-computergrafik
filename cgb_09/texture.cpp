@@ -28,6 +28,29 @@
 Texture::Texture(const std::string &filename)
     : filename(filename)
 {
+    int width, height, channels;
+    stbi_set_flip_vertically_on_load(1);
+    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &channels, 0);
+    if (!data)
+    {
+        throw std::runtime_error("Failed to load texture " + filename);
+    }
+
+    GLenum format;
+    if (channels == 3)
+    {
+        format = GL_RGB;
+    }
+    else if (channels == 4)
+    {
+        format = GL_RGBA;
+    }
+    else
+    {
+        stbi_image_free(data);
+        throw std::runtime_error("Unsupported channel count in texture " + filename);
+    }
+
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
 
@@ -35,20 +58,14 @@ Texture::Texture(const std::string &filename)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
 
-    int width, height, channels;
-    stbi_set_flip_vertically_on_load(1);
-    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &channels, 0);
-    if (!data)
-    {
-        stbi_image_free(data);
-        throw std::runtime_error("Failed to load texture " + filename);
-    }
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
     stbi_image_free(data);
 }
 
 Texture::~Texture()
 {
+    glDeleteTextures(1, &id);
 }

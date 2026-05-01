@@ -29,6 +29,12 @@ class Texture
   public:
     Texture(const std::string &filename);
     ~Texture();
+
+    Texture(const Texture &) = delete;
+    Texture &operator=(const Texture &) = delete;
+    Texture(Texture &&) = delete;
+    Texture &operator=(Texture &&) = delete;
+
     GLuint id;
 
   private:
