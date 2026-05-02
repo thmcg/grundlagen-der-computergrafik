@@ -31,6 +31,11 @@ struct Vector2
 {
     double x;
     double y;
+
+    Vector2(double x, double y)
+        : x(x), y(y)
+    {
+    }
 };
 
 struct Vector3
@@ -39,9 +44,14 @@ struct Vector3
     double y;
     double z;
 
+    Vector3(double x, double y, double z)
+        : x(x), y(y), z(z)
+    {
+    }
+
     Vector3 normalize() const
     {
-        double len = sqrt(x * x + y * y + z * z);
+        double len = std::sqrt(x * x + y * y + z * z);
         return {x / len, y / len, z / len};
     }
 };
@@ -63,7 +73,7 @@ struct Vector4
     {
     }
 
-    Vector3 xyz()
+    Vector3 xyz() const
     {
         return {x, y, z};
     }
@@ -75,6 +85,11 @@ struct Color
     double g;
     double b;
     double a;
+
+    Color(double r, double g, double b, double a)
+        : r(r), g(g), b(b), a(a)
+    {
+    }
 };
 
 struct Vertex
@@ -93,10 +108,10 @@ struct Vertex
 
 struct Matrix4
 {
-    double m11;  double m21;  double m31;  double m41;
-    double m12;  double m22;  double m32;  double m42;
-    double m13;  double m23;  double m33;  double m43;
-    double m14;  double m24;  double m34;  double m44;
+    double m11 = 0;  double m21 = 0;  double m31 = 0;  double m41 = 0;
+    double m12 = 0;  double m22 = 0;  double m32 = 0;  double m42 = 0;
+    double m13 = 0;  double m23 = 0;  double m33 = 0;  double m43 = 0;
+    double m14 = 0;  double m24 = 0;  double m34 = 0;  double m44 = 0;
 
     static Matrix4 identity()
     {
@@ -138,10 +153,10 @@ struct Matrix4
     static Matrix4 rotateX(double a)
     {
         Matrix4 m = {
-            1,      0,       0, 0,
-            0, cos(a), -sin(a), 0,
-            0, sin(a),  cos(a), 0,
-            0,      0,       0, 1
+            1,             0,              0, 0,
+            0, std::cos(a), -std::sin(a), 0,
+            0, std::sin(a),  std::cos(a), 0,
+            0,             0,              0, 1
         };
         return m;
     }
@@ -155,10 +170,10 @@ struct Matrix4
     static Matrix4 rotateY(double a)
     {
         Matrix4 m = {
-             cos(a), 0, sin(a), 0,
-                  0, 1,      0, 0,
-            -sin(a), 0, cos(a), 0,
-                  0, 0,      0, 1
+             std::cos(a), 0, std::sin(a), 0,
+                       0, 1,           0, 0,
+            -std::sin(a), 0, std::cos(a), 0,
+                       0, 0,           0, 1
         };
         return m;
     }
@@ -172,17 +187,17 @@ struct Matrix4
     static Matrix4 rotateZ(double a)
     {
         Matrix4 m = {
-            cos(a), -sin(a), 0, 0,
-            sin(a),  cos(a), 0, 0,
-                 0,       0, 1, 0,
-                 0,       0, 0, 1
+            std::cos(a), -std::sin(a), 0, 0,
+            std::sin(a),  std::cos(a), 0, 0,
+                      0,            0, 1, 0,
+                      0,            0, 0, 1
         };
         return m;
     }
 
     /**
      * Creates a scaling matrix.
-     * 
+     *
      * @param a The scaling factor.
      * @return The scaling matrix.
      */
@@ -213,17 +228,17 @@ struct Matrix4
             m11 * b.m21 + m21 * b.m22 + m31 * b.m23 + m41 * b.m24,
             m11 * b.m31 + m21 * b.m32 + m31 * b.m33 + m41 * b.m34,
             m11 * b.m41 + m21 * b.m42 + m31 * b.m43 + m41 * b.m44,
-            
+
             m12 * b.m11 + m22 * b.m12 + m32 * b.m13 + m42 * b.m14,
             m12 * b.m21 + m22 * b.m22 + m32 * b.m23 + m42 * b.m24,
             m12 * b.m31 + m22 * b.m32 + m32 * b.m33 + m42 * b.m34,
             m12 * b.m41 + m22 * b.m42 + m32 * b.m43 + m42 * b.m44,
-            
+
             m13 * b.m11 + m23 * b.m12 + m33 * b.m13 + m43 * b.m14,
             m13 * b.m21 + m23 * b.m22 + m33 * b.m23 + m43 * b.m24,
             m13 * b.m31 + m23 * b.m32 + m33 * b.m33 + m43 * b.m34,
             m13 * b.m41 + m23 * b.m42 + m33 * b.m43 + m43 * b.m44,
-            
+
             m14 * b.m11 + m24 * b.m12 + m34 * b.m13 + m44 * b.m14,
             m14 * b.m21 + m24 * b.m22 + m34 * b.m23 + m44 * b.m24,
             m14 * b.m31 + m24 * b.m32 + m34 * b.m33 + m44 * b.m34,
