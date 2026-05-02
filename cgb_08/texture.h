@@ -39,5 +39,4 @@ class Texture
 
   private:
     GLuint id;
-    std::string filename;
 };

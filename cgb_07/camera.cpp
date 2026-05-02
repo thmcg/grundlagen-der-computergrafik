@@ -30,10 +30,6 @@ Camera::Camera(double pitch, double yaw, double cameraDistance)
 {
 }
 
-Camera::~Camera()
-{
-}
-
 void Camera::changePosition(double x, double y)
 {
     double deltaX = x - mouseLastX;
@@ -45,7 +41,7 @@ void Camera::changePosition(double x, double y)
     {
         yaw += 360;
     }
-    while (yaw > 360)
+    while (yaw >= 360)
     {
         yaw -= 360;
     }
@@ -79,7 +75,7 @@ void Camera::loadProjectionMatrix(double aspectRatio) const
     double zFar = 100.0;
     double fov = deg2rad(45.0);
 
-    double h = zNear * tanf(fov * 0.5);
+    double h = zNear * std::tan(fov * 0.5);
     double w = h * aspectRatio;
 
     glMatrixMode(GL_PROJECTION);

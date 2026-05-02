@@ -36,12 +36,12 @@ class Renderer
     Renderer(Renderer &&) = delete;
     Renderer &operator=(Renderer &&) = delete;
     void start();
-    void printFps();
-    void onKeyboardInput(GLFWwindow *window, int key, int scancode, int action, int mods);
 
   private:
     GLFWwindow *window = nullptr;
     Camera activeCamera = Camera(0.0, 0.0, 3.0);
     double previousTime = 0.0;
     uint32_t frameCount = 0;
+    void printFps();
+    void onKeyboardInput(GLFWwindow *window, int key, int scancode, int action, int mods);
 };

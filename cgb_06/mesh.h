@@ -31,7 +31,7 @@ class Mesh
     void setRotation(const Vector3 &rotation);
 
   protected:
-    Matrix4 position = Matrix4::translate(0, 0,0);
-    Matrix4 rotation = Matrix4::rotateX(0.0);
+    Matrix4 position = Matrix4::identity();
+    Matrix4 rotation = Matrix4::identity();
     std::vector<Vertex> vertices = {};
 };

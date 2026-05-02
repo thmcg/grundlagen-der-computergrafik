@@ -28,8 +28,6 @@
 class Scene
 {
   public:
-    Scene();
-    ~Scene();
     void addMesh(const std::shared_ptr<Mesh> &mesh);
     void render(const Camera &camera) const;
     void setLight(const Vector4 &position, const Color &ambient, const Color &diffuse, const Color &specular);

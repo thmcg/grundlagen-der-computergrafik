@@ -19,14 +19,6 @@
 
 #include "scene.h"
 
-Scene::Scene()
-{
-}
-
-Scene::~Scene()
-{
-}
-
 void Scene::render(GLFWwindow *window, const Camera &camera)
 {
     int width, height;

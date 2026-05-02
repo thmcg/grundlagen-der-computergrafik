@@ -23,7 +23,6 @@ class Camera
 {
   public:
     Camera(double pitch, double yaw, double cameraDistance);
-    ~Camera();
     void changePosition(double x, double y);
     void changeDistance(double deltaZ);
     void loadProjectionMatrix(double aspectRatio) const;

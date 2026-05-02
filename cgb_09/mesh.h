@@ -37,8 +37,8 @@ class Mesh
     void setMaterial(const Color &ambient, const Color &diffuse, const Color &specular, const Color &emission, const float shininess);
 
   protected:
-    Matrix4 position = Matrix4::translate(0, 0,0);
-    Matrix4 rotation = Matrix4::rotateX(0.0);
+    Matrix4 position = Matrix4::identity();
+    Matrix4 rotation = Matrix4::identity();
     Matrix4 scale = Matrix4::scale(1.0);
     std::vector<Vertex> vertices = {};
     std::shared_ptr<Texture> texture = nullptr;

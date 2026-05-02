@@ -21,6 +21,16 @@
 
 #include <chrono>
 
+namespace
+{
+    constexpr double earthRadiusKm    = 6370.0;
+    constexpr double satelliteHalfKm  = 25.0;
+    constexpr double satelliteOrbitKm = 6770.0;  // 6370 + 400 km altitude
+
+    constexpr double satelliteScale   = satelliteHalfKm  / earthRadiusKm;
+    constexpr double satelliteOrbit   = satelliteOrbitKm / earthRadiusKm;
+}
+
 Simulation::Simulation(const std::shared_ptr<Mesh> &earth, const std::shared_ptr<Mesh> &satellite)
     : earth(earth), satellite(satellite)
 {
@@ -43,19 +53,19 @@ void Simulation::updateEarthRotation(double time)
 
     double timeOfYear = std::fmod(time + 864000.0, 31557600);
 
-    double earthEcliptic = cos(timeOfYear / 31557600.0 * deg2rad(360)) * deg2rad(-23.4);
+    double earthEcliptic = std::cos(timeOfYear / 31557600.0 * deg2rad(360)) * deg2rad(-23.4);
 
     earth->setRotation(Vector3(earthEcliptic, earthRotation, 0));
 }
 
 void Simulation::updateSatellitePosition(double time)
 {
-    double scale = 25.0 / 6370.0;
+    double scale = satelliteScale;
 
     double orbitTime = 5400.0;
     double orbitProgress = std::fmod(time, orbitTime);
 
-    double orbitRadius = 6770.0 / 6370.0;
+    double orbitRadius = satelliteOrbit;
     Vector4 position = Vector4(0.0, 0.0, orbitRadius, 1.0);
 
     Matrix4 orbit = Matrix4::rotateX(deg2rad(45)) * Matrix4::rotateY(orbitProgress / orbitTime * deg2rad(360.0));

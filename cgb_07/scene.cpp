@@ -23,14 +23,6 @@
 
 #include <GLFW/glfw3.h>
 
-Scene::Scene()
-{
-}
-
-Scene::~Scene()
-{
-}
-
 void Scene::addMesh(const std::shared_ptr<Mesh> &mesh)
 {
     meshes.push_back(mesh);

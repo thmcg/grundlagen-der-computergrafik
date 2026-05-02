@@ -26,7 +26,6 @@
 #include <stdexcept>
 
 Texture::Texture(const std::string &filename)
-    : filename(filename)
 {
     int width, height, channels;
     stbi_set_flip_vertically_on_load(1);

@@ -36,7 +36,7 @@ Planet::Planet(const std::shared_ptr<Texture> &texture, const std::shared_ptr<Te
     glLightfv(GL_LIGHT2, GL_AMBIENT, black);
 
     // Light 3 is diffuse light shining in the direction of the camera
-    float lightPositionF[4] = {0.0f, 0.0f, 50000.0f, 0.0f};
+    float lightPositionF[4] = {0.0f, 0.0f, 1.0f, 0.0f};
     glLightfv(GL_LIGHT3, GL_DIFFUSE, white2);
     glLightfv(GL_LIGHT3, GL_SPECULAR, black);
     glLightfv(GL_LIGHT3, GL_AMBIENT, black);
@@ -64,11 +64,11 @@ void Planet::render() const
     float worldMatrixF[16];
     worldMatrix.toColumnMajor(worldMatrixF);
 
-    float lightPositionSun[4] = {0.0f, 0.0f, 50000.0f, 0.0f};
+    float lightPositionSun[4] = {0.0f, 0.0f, 1.0f, 0.0f};
     glLightfv(GL_LIGHT2, GL_POSITION, lightPositionSun);
     glLightfv(GL_LIGHT5, GL_POSITION, lightPositionSun);
     glLightfv(GL_LIGHT6, GL_POSITION, lightPositionSun);
-    float lightPositionInverse[4] = {0.0f, 0.0f, -50000.0f, 0.0f};
+    float lightPositionInverse[4] = {0.0f, 0.0f, -1.0f, 0.0f};
     glLightfv(GL_LIGHT7, GL_POSITION, lightPositionInverse);
 
     // Disable default light

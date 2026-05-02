@@ -36,8 +36,6 @@ class Renderer
     Renderer(Renderer &&) = delete;
     Renderer &operator=(Renderer &&) = delete;
     void start();
-    void printFps();
-    void onKeyboardInput(GLFWwindow *window, int key, int scancode, int action, int mods);
 
   private:
     GLFWwindow *window = nullptr;
@@ -47,4 +45,6 @@ class Renderer
     uint32_t frameCount = 0;
 
     void setViewportSize();
+    void printFps();
+    void onKeyboardInput(GLFWwindow *window, int key, int scancode, int action, int mods);
 };

@@ -127,7 +127,7 @@ void Renderer::start()
     setViewportSize();
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    Vector4 lightPosition(0, 0, 50000, 0);
+    Vector4 lightPosition(0, 0, 1, 0);
     foreground.setLight(lightPosition, Colors::ambientLight, Colors::sunLight, Colors::white);
 
     while (!glfwWindowShouldClose(window))

@@ -28,7 +28,5 @@
 class Scene
 {
   public:
-    Scene();
-    ~Scene();
     void render(GLFWwindow *window, const Camera &camera);
 };

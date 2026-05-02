@@ -19,15 +19,6 @@
 
 #include "scene.h"
 
-Scene::Scene()
-{
-}
-
-Scene::~Scene()
-{
-    meshes.clear();
-}
-
 void Scene::addMesh(const std::shared_ptr<Mesh> &mesh)
 {
     meshes.push_back(mesh);

@@ -34,8 +34,8 @@ class Renderer
     Renderer(Renderer &&) = delete;
     Renderer &operator=(Renderer &&) = delete;
     void start();
-    void onKeyboardInput(GLFWwindow *window, int key, int scancode, int action, int mods);
 
   private:
     GLFWwindow *window = nullptr;
+    void onKeyboardInput(GLFWwindow *window, int key, int scancode, int action, int mods);
 };
