@@ -26,5 +26,5 @@
 class Scene
 {
   public:
-    void render(GLFWwindow *window);
+    void render(GLFWwindow *window) const;
 };

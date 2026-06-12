@@ -28,7 +28,7 @@ class Scene
 {
   public:
     void addMesh(const std::shared_ptr<Mesh> &mesh);
-    void render();
+    void render() const;
 
   private:
     std::vector<std::shared_ptr<Mesh>> meshes;

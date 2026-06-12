@@ -24,7 +24,7 @@ void Scene::addMesh(const std::shared_ptr<Mesh> &mesh)
     meshes.push_back(mesh);
 }
 
-void Scene::render()
+void Scene::render() const
 {
     for (const std::shared_ptr<Mesh> &mesh : meshes)
     {

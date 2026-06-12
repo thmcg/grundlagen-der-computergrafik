@@ -19,7 +19,7 @@
 
 #include "scene.h"
 
-void Scene::render(GLFWwindow *window)
+void Scene::render(GLFWwindow *window) const
 {
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
