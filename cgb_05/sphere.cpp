@@ -40,7 +40,6 @@ Sphere::Sphere(const Color &color)
             vectors[x][y] = result.xyz();
         }
     }
-    int i = 0;
     for (int y = 0; y < rings; y++)
     {
         for (int x = 0; x < segments; x++)

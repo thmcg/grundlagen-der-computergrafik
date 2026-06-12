@@ -41,7 +41,6 @@ Sphere::Sphere(const std::shared_ptr<Texture> &texture)
             vectors[x][y] = result.xyz();
         }
     }
-    int i = 0;
     for (int y = 0; y < rings; y++)
     {
         for (int x = 0; x < segments; x++)
